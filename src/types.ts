@@ -20,6 +20,7 @@ export type Chore = {
   assigneeId: string | null;
   recurrence: Recurrence;
   startDate: string; // ISO date of first occurrence
+  startTime?: string; // HH:mm, optional
 };
 
 export type ChoreCompletion = {

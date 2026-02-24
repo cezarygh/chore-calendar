@@ -18,6 +18,7 @@ const defaultForm = (): FormState => ({
   description: '',
   assigneeId: '',
   startDate: TODAY,
+  startTime: '',
   recurrenceType: 'once',
   every: 1,
   unit: 'weeks',
@@ -29,6 +30,7 @@ type FormState = {
   description: string;
   assigneeId: string;
   startDate: string;
+  startTime: string;
   recurrenceType: 'once' | 'interval';
   every: number;
   unit: 'days' | 'weeks' | 'months';
@@ -46,6 +48,7 @@ export default function ChoreModal({ open, onClose, onSave, members, initial }: 
         description: initial.description ?? '',
         assigneeId: initial.assigneeId ?? '',
         startDate: initial.startDate,
+        startTime: initial.startTime ?? '',
         recurrenceType: r.type,
         every: r.type === 'interval' ? r.every : 1,
         unit: r.type === 'interval' ? r.unit : 'weeks',
@@ -81,6 +84,7 @@ export default function ChoreModal({ open, onClose, onSave, members, initial }: 
       assigneeId: form.assigneeId || null,
       recurrence,
       startDate: form.startDate,
+      ...(form.startTime ? { startTime: form.startTime } : {}),
     };
 
     onSave(chore);
@@ -140,18 +144,29 @@ export default function ChoreModal({ open, onClose, onSave, members, initial }: 
               </select>
             </div>
 
-            {/* Start date */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Start date <span className="text-red-500">*</span>
-              </label>
-              <input
-                required
-                type="date"
-                className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                value={form.startDate}
-                onChange={(e) => set('startDate', e.target.value)}
-              />
+            {/* Start date + time */}
+            <div className="flex gap-3">
+              <div className="flex-1">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Start date <span className="text-red-500">*</span>
+                </label>
+                <input
+                  required
+                  type="date"
+                  className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  value={form.startDate}
+                  onChange={(e) => set('startDate', e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Time (optional)</label>
+                <input
+                  type="time"
+                  className="border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  value={form.startTime}
+                  onChange={(e) => set('startTime', e.target.value)}
+                />
+              </div>
             </div>
 
             {/* Recurrence type */}
