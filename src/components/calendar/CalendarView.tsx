@@ -36,7 +36,7 @@ type Props = {
 };
 
 export default function CalendarView({ chores, members, isCompleted, onToggleComplete }: Props) {
-  const [view, setView] = useState<View>(Views.MONTH);
+  const [view, setView] = useState<View>(window.innerWidth < 768 ? Views.AGENDA : Views.MONTH);
   const [date, setDate] = useState(new Date());
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
 
@@ -108,7 +108,7 @@ export default function CalendarView({ chores, members, isCompleted, onToggleCom
   }
 
   return (
-    <div className="flex flex-col h-full p-4">
+    <div className="flex flex-col h-full p-2 md:p-4">
       <div className="flex-1 min-h-0">
         <Calendar
           localizer={localizer}

@@ -16,7 +16,7 @@ const navItems: { id: Page; label: string; icon: string }[] = [
 
 export default function Sidebar({ page, onNavigate, members }: Props) {
   return (
-    <aside className="w-56 flex-shrink-0 bg-gray-900 text-white flex flex-col h-full">
+    <aside className="hidden md:flex w-56 flex-shrink-0 bg-gray-900 text-white flex-col h-full">
       {/* Logo */}
       <div className="p-4 border-b border-gray-700">
         <h1 className="text-lg font-bold tracking-tight">🏠 ChoreBoard</h1>
