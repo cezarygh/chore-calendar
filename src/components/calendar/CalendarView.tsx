@@ -19,6 +19,7 @@ type CalendarEvent = {
   title: string;
   start: Date;
   end: Date;
+  allDay?: boolean;
   resource: {
     chore: Chore;
     dateStr: string; // ISO date
@@ -55,10 +56,22 @@ export default function CalendarView({ chores, members, isCompleted, onToggleCom
       const member = chore.assigneeId ? memberMap.get(chore.assigneeId) ?? null : null;
       return occurrences.map((d) => {
         const dateStr = format(d, 'yyyy-MM-dd');
+        let start = d;
+        let end = d;
+        let allDay = true;
+        if (chore.startTime) {
+          const [hours, minutes] = chore.startTime.split(':').map(Number);
+          start = new Date(d);
+          start.setHours(hours, minutes, 0, 0);
+          end = new Date(start);
+          end.setHours(end.getHours() + 1);
+          allDay = false;
+        }
         return {
           title: chore.title,
-          start: d,
-          end: d,
+          start,
+          end,
+          allDay,
           resource: {
             chore,
             dateStr,
