@@ -20,3 +20,12 @@
 .rbc-event.completed-event {
   @apply opacity-60 line-through;
 }
+
+@media (max-width: 640px) {
+  .rbc-toolbar {
+    @apply flex-col gap-2 items-start;
+  }
+  .rbc-toolbar-label {
+    @apply text-sm;
+  }
+}

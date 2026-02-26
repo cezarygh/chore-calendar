@@ -42,13 +42,13 @@ export default function MembersPanel({ members, onAdd, onRemove, onUpdate }: Pro
   }
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
+    <div className="p-4 md:p-6 max-w-2xl mx-auto">
       <h1 className="text-2xl font-bold text-gray-800 mb-6">Household Members</h1>
 
       {/* Add member form */}
       <form onSubmit={handleAdd} className="bg-white border border-gray-200 rounded-lg p-4 mb-6 shadow-sm">
         <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">Add Member</h2>
-        <div className="flex gap-3 items-end">
+        <div className="flex flex-col sm:flex-row gap-3 sm:items-end">
           <div className="flex-1">
             <label className="block text-sm text-gray-600 mb-1">Name</label>
             <input
@@ -77,7 +77,7 @@ export default function MembersPanel({ members, onAdd, onRemove, onUpdate }: Pro
           </div>
           <button
             type="submit"
-            className="bg-indigo-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-indigo-700 transition-colors"
+            className="bg-indigo-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-indigo-700 transition-colors w-full sm:w-auto"
           >
             Add
           </button>
